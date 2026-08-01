@@ -25,7 +25,33 @@ function renderMore() {
 }
 function openLightbox(index) { state.current = index; const photo = state.photos[index]; $('lightbox-image').src = photo.src; $('lightbox-image').alt = photo.name; $('lightbox-caption').textContent = `${index + 1} / ${state.photos.length} · ${photo.name}`; const link = $('download-single'); link.href = photo.download; link.download = photo.name; lightbox.showModal(); }
 function move(step) { openLightbox((state.current + step + state.photos.length) % state.photos.length); }
-async function downloadSelected() { for (const photo of state.photos.filter((p) => state.selected.has(p.name))) { const link = document.createElement('a'); link.href = photo.download; link.download = photo.name; document.body.append(link); link.click(); link.remove(); await new Promise((r) => setTimeout(r, 180)); } }
+function downloadSelected() {
+  const selectedPhotos = state.photos.filter((p) => state.selected.has(p.name));
+  if (!selectedPhotos.length) return;
+  const button = $('download-selected');
+  button.disabled = true;
+  button.textContent = '准备下载…';
+  selectedPhotos.forEach((photo, index) => {
+    window.setTimeout(() => {
+      triggerDownload(photo.download, photo.name);
+      if (index === selectedPhotos.length - 1) {
+        window.setTimeout(() => {
+          button.disabled = false;
+          button.textContent = '下载选中项';
+        }, 600);
+      }
+    }, index * 450);
+  });
+}
+function triggerDownload(href, filename) {
+  const link = document.createElement('a');
+  link.href = href;
+  link.download = filename;
+  link.rel = 'noopener';
+  document.body.append(link);
+  link.click();
+  link.remove();
+}
 $('select-all').addEventListener('click', () => { state.photos.forEach((p) => state.selected.add(p.name)); document.querySelectorAll('.photo-select').forEach((x) => x.checked = true); updateControls(); });
 $('clear-selection').addEventListener('click', () => { state.selected.clear(); document.querySelectorAll('.photo-select').forEach((x) => x.checked = false); updateControls(); });
 $('download-selected').addEventListener('click', downloadSelected);
