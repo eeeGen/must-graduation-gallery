@@ -11,7 +11,7 @@
     <header class="hero">
       <p class="eyebrow">MACAO UNIVERSITY OF SCIENCE AND TECHNOLOGY</p>
       <h1>MUST 毕业画廊</h1>
-      <p class="subtitle">2026 · 把这一刻好好收藏</p>
+      <p class="subtitle">2026</p>
     </header>
 
     <main>
@@ -20,7 +20,9 @@
         <div class="actions">
           <button id="select-all" type="button">全选</button>
           <button id="clear-selection" type="button" disabled>取消全选</button>
-          <button id="download-selected" type="button" disabled>下载选中项</button>
+          <button id="download-selected" type="button" disabled>
+            下载选中项
+          </button>
         </div>
       </section>
       <p class="hint">点击图片放大查看；勾选图片后可批量下载。</p>
@@ -29,20 +31,47 @@
     </main>
 
     <dialog id="lightbox" class="lightbox">
-      <button id="close-lightbox" class="icon-button close" type="button" aria-label="关闭">×</button>
-      <button id="previous" class="icon-button previous" type="button" aria-label="上一张">‹</button>
+      <button
+        id="close-lightbox"
+        class="icon-button close"
+        type="button"
+        aria-label="关闭"
+      >
+        ×
+      </button>
+      <button
+        id="previous"
+        class="icon-button previous"
+        type="button"
+        aria-label="上一张"
+      >
+        ‹
+      </button>
       <figure>
         <img id="lightbox-image" alt="" />
         <figcaption id="lightbox-caption"></figcaption>
       </figure>
-      <button id="next" class="icon-button next" type="button" aria-label="下一张">›</button>
+      <button
+        id="next"
+        class="icon-button next"
+        type="button"
+        aria-label="下一张"
+      >
+        ›
+      </button>
       <a id="download-single" class="download-single" download>下载这张照片</a>
     </dialog>
 
     <template id="card-template">
       <article class="card">
-        <button class="photo-button" type="button"><img loading="lazy" alt="" /></button>
-        <label class="select-label"><input class="photo-select" type="checkbox" /><span>选择</span></label>
+        <button class="photo-button" type="button">
+          <img loading="lazy" alt="" />
+        </button>
+        <label class="select-label"
+          ><input class="photo-select" type="checkbox" /><span
+            >选择</span
+          ></label
+        >
         <a class="card-download" download>下载</a>
       </article>
     </template>
